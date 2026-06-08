@@ -1,5 +1,6 @@
 import type { Dictionary } from "@/lib/i18n/types";
 import { ButtonLink } from "./button";
+import { ScrollReveal } from "./scroll-reveal";
 
 type CTAProps = {
   dict: Dictionary;
@@ -9,6 +10,7 @@ export function CTA({ dict }: CTAProps) {
   const { cta } = dict;
 
   return (
+    <ScrollReveal>
     <section className="py-14 md:py-28">
       <div className="mx-auto max-w-[1200px] px-4 md:px-6">
         <div className="relative overflow-hidden rounded-2xl bg-foreground px-5 py-12 text-center sm:rounded-3xl sm:px-8 sm:py-16 md:px-16 md:py-20">
@@ -32,5 +34,6 @@ export function CTA({ dict }: CTAProps) {
         </div>
       </div>
     </section>
+    </ScrollReveal>
   );
 }

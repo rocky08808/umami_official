@@ -1,6 +1,7 @@
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
 import { Logo } from "./logo";
+import { ScrollReveal } from "./scroll-reveal";
 
 type FooterProps = {
   locale: Locale;
@@ -11,6 +12,7 @@ export function Footer({ locale, dict }: FooterProps) {
   const { footer } = dict;
 
   return (
+    <ScrollReveal>
     <footer className="border-t border-border bg-surface-raised/50 pb-[env(safe-area-inset-bottom)]">
       <div className="mx-auto max-w-[1200px] px-4 py-12 md:px-6 md:py-16">
         <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-4 md:gap-12">
@@ -58,5 +60,6 @@ export function Footer({ locale, dict }: FooterProps) {
         </div>
       </div>
     </footer>
+    </ScrollReveal>
   );
 }

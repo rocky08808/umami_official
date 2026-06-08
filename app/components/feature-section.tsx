@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ScrollReveal } from "./scroll-reveal";
 import { Screenshot } from "./screenshot";
 
 type FeatureSectionProps = {
@@ -10,6 +11,7 @@ type FeatureSectionProps = {
   imageWidth: number;
   imageHeight: number;
   reversed?: boolean;
+  revealDelay?: number;
 };
 
 export function FeatureSection({
@@ -21,8 +23,10 @@ export function FeatureSection({
   imageWidth,
   imageHeight,
   reversed = false,
+  revealDelay = 0,
 }: FeatureSectionProps) {
   return (
+    <ScrollReveal delay={revealDelay}>
     <section className="group" aria-labelledby={id}>
       <div className="grid items-center gap-6 md:grid-cols-2 md:gap-14 lg:gap-20">
         <div
@@ -56,5 +60,6 @@ export function FeatureSection({
         </div>
       </div>
     </section>
+    </ScrollReveal>
   );
 }

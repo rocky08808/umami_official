@@ -1,15 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { defaultLocale, isValidLocale, locales } from "./lib/i18n/config";
-
-function getPreferredLocale(request: NextRequest): string {
-  const header = (request.headers.get("accept-language") ?? "").toLowerCase();
-
-  for (const locale of locales) {
-    if (header.includes(locale)) return locale;
-  }
-
-  return defaultLocale;
-}
+import { isValidLocale, locales } from "./lib/i18n/config";
+import { negotiateLocale } from "./lib/i18n/negotiate-locale";
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -27,9 +18,11 @@ export function middleware(request: NextRequest) {
     return response;
   }
 
-  const locale = getPreferredLocale(request);
+  const locale = negotiateLocale(request.headers.get("accept-language"));
   request.nextUrl.pathname = `/${locale}${pathname === "/" ? "" : pathname}`;
-  return NextResponse.redirect(request.nextUrl);
+  const response = NextResponse.redirect(request.nextUrl);
+  response.headers.set("Vary", "Accept-Language");
+  return response;
 }
 
 export const config = {

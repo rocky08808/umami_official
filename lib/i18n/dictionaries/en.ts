@@ -112,7 +112,6 @@ const en: Dictionary = {
       {
         title: "Company",
         links: [
-          { label: "About", href: "/#features" },
           { label: "Privacy", href: "/privacy" },
           { label: "Terms", href: "/terms" },
         ],

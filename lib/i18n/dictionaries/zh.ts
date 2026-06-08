@@ -110,7 +110,6 @@ const zh: Dictionary = {
       {
         title: "公司",
         links: [
-          { label: "关于", href: "/#features" },
           { label: "隐私政策", href: "/privacy" },
           { label: "服务条款", href: "/terms" },
         ],

@@ -1,7 +1,7 @@
 "use client";
 
 import type { ComponentProps, MouseEvent } from "react";
-import { CLOUD_REDIRECT_EVENT, isCloudUrl, trackCloudRedirect } from "@/lib/analytics";
+import { isCloudUrl, trackCloudRedirect } from "@/lib/analytics";
 
 type ButtonLinkProps = ComponentProps<"a"> & {
   variant?: "primary" | "outline" | "ghost";
@@ -47,12 +47,6 @@ export function ButtonLink({
     <a
       href={href}
       onClick={handleClick}
-      {...(cloudLink
-        ? {
-            "data-webscount-event": CLOUD_REDIRECT_EVENT,
-            "data-webscount-event-source": source,
-          }
-        : {})}
       className={`inline-flex items-center justify-center rounded-full font-medium transition-all duration-200 ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >

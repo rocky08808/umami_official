@@ -34,15 +34,21 @@ export default async function Home({ params }: PageProps) {
     <div className="min-h-full bg-background text-foreground">
       <JsonLd data={buildJsonLd(locale, dict)} />
       <Header locale={locale} dict={dict} />
-      <main>
+      <main id="main-content">
         <Hero dict={dict} />
 
         <div id="features" className="mx-auto max-w-[1000px] px-4 md:px-6">
-          <section className="flex flex-col items-center gap-3 px-1 py-12 text-center sm:gap-4 sm:py-16 md:py-24">
+          <section
+            aria-labelledby="features-heading"
+            className="flex flex-col items-center gap-3 px-1 py-12 text-center sm:gap-4 sm:py-16 md:py-24"
+          >
             <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted sm:text-xs sm:tracking-[0.24em]">
               {features.eyebrow}
             </span>
-            <h2 className="max-w-2xl text-2xl font-bold tracking-tight text-balance sm:text-3xl md:text-4xl">
+            <h2
+              id="features-heading"
+              className="max-w-2xl text-2xl font-bold tracking-tight text-balance sm:text-3xl md:text-4xl"
+            >
               {features.title}
             </h2>
             <p className="max-w-[640px] text-base leading-relaxed text-muted sm:text-lg">
@@ -54,6 +60,7 @@ export default async function Home({ params }: PageProps) {
             {features.items.map((item, index) => (
               <FeatureSection
                 key={item.question}
+                id={`feature-${index}`}
                 question={item.question}
                 description={item.description}
                 image={featureImages[index]}

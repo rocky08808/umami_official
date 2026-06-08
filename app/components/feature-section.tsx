@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Screenshot } from "./screenshot";
 
 type FeatureSectionProps = {
+  id: string;
   question: string;
   description: ReactNode;
   image: string;
@@ -12,6 +13,7 @@ type FeatureSectionProps = {
 };
 
 export function FeatureSection({
+  id,
   question,
   description,
   image,
@@ -21,14 +23,17 @@ export function FeatureSection({
   reversed = false,
 }: FeatureSectionProps) {
   return (
-    <section className="group">
+    <section className="group" aria-labelledby={id}>
       <div className="grid items-center gap-6 md:grid-cols-2 md:gap-14 lg:gap-20">
         <div
           className={`order-2 space-y-3 md:order-none md:space-y-4 md:pr-4 ${
             reversed ? "md:order-2" : ""
           }`}
         >
-          <h3 className="text-lg font-bold leading-snug tracking-tight sm:text-xl md:text-2xl lg:text-[1.75rem]">
+          <h3
+            id={id}
+            className="text-lg font-bold leading-snug tracking-tight sm:text-xl md:text-2xl lg:text-[1.75rem]"
+          >
             {question}
           </h3>
           <p className="text-sm leading-relaxed text-muted sm:text-base md:text-lg md:leading-8">

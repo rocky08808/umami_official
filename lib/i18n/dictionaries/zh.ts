@@ -2,16 +2,20 @@ import type { Dictionary } from "../types";
 
 const zh: Dictionary = {
   meta: {
-    title: "webscount – 注重隐私的网站分析",
+    title: "webscount – 注重隐私的网站分析工具",
     description:
-      "强大的数据分析，无需复杂配置。几分钟完成部署，立即获取洞察，无需 Cookie。",
+      "webscount 是注重隐私的网站分析平台，几分钟完成部署，实时掌握流量、转化与收入数据，无需 Cookie，可作为 Google Analytics 的轻量替代方案。",
     keywords: [
-      "网站分析",
-      "数据分析",
-      "隐私分析",
-      "Google Analytics 替代",
       "webscount",
+      "网站分析",
+      "网站统计",
+      "数据分析",
+      "流量分析",
+      "访客分析",
+      "隐私分析",
       "无 Cookie 统计",
+      "Google Analytics 替代",
+      "网站分析工具",
     ],
     ogImageAlt: "webscount 网站分析仪表盘预览",
   },

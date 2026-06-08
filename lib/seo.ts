@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
-import { locales, localeHtmlLang, type Locale } from "./i18n/config";
+import {
+  defaultLocale,
+  locales,
+  localeHtmlLang,
+  type Locale,
+} from "./i18n/config";
 import type { Dictionary } from "./i18n/types";
+import { cloudUrl, siteName } from "./site";
 
 export const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://webscount.com";
@@ -19,24 +25,67 @@ export function localePath(locale: Locale, path = ""): string {
   return `/${locale}${suffix}`;
 }
 
+export function absoluteUrl(path: string): string {
+  return path.startsWith("http") ? path : `${siteUrl}${path}`;
+}
+
+export function buildLanguageAlternates() {
+  const languages = Object.fromEntries(
+    locales.map((l) => [localeHtmlLang[l], absoluteUrl(localePath(l))])
+  );
+
+  return {
+    ...languages,
+    "x-default": absoluteUrl(localePath(defaultLocale)),
+  };
+}
+
 export function buildAlternates(locale: Locale) {
   return {
-    canonical: `${siteUrl}${localePath(locale)}`,
-    languages: Object.fromEntries(
-      locales.map((l) => [localeHtmlLang[l], `${siteUrl}${localePath(l)}`])
-    ),
+    canonical: absoluteUrl(localePath(locale)),
+    languages: buildLanguageAlternates(),
+  };
+}
+
+function buildVerification(): Metadata["verification"] | undefined {
+  const google = process.env.GOOGLE_SITE_VERIFICATION;
+  const yandex = process.env.YANDEX_VERIFICATION;
+  const bing = process.env.BING_SITE_VERIFICATION;
+
+  if (!google && !yandex && !bing) return undefined;
+
+  return {
+    ...(google ? { google } : {}),
+    ...(yandex ? { yandex } : {}),
+    ...(bing ? { other: { "msvalidate.01": bing } } : {}),
   };
 }
 
 export function buildMetadata(locale: Locale, dict: Dictionary): Metadata {
   const { meta } = dict;
+  const pageUrl = absoluteUrl(localePath(locale));
 
   return {
     metadataBase: new URL(siteUrl),
-    title: meta.title,
+    title: {
+      default: meta.title,
+      template: `%s | ${siteName}`,
+    },
     description: meta.description,
     keywords: meta.keywords,
+    applicationName: siteName,
+    authors: [{ name: siteName, url: siteUrl }],
+    creator: siteName,
+    publisher: siteName,
+    category: "technology",
     alternates: buildAlternates(locale),
+    manifest: "/manifest.webmanifest",
+    verification: buildVerification(),
+    formatDetection: {
+      telephone: false,
+      email: false,
+      address: false,
+    },
     icons: {
       icon: [
         { url: "/favicon.ico" },
@@ -48,8 +97,11 @@ export function buildMetadata(locale: Locale, dict: Dictionary): Metadata {
     openGraph: {
       type: "website",
       locale: locale === "zh" ? "zh_CN" : "en_US",
-      url: localePath(locale),
-      siteName: "webscount",
+      alternateLocale: locales
+        .filter((l) => l !== locale)
+        .map((l) => (l === "zh" ? "zh_CN" : "en_US")),
+      url: pageUrl,
+      siteName,
       title: meta.title,
       description: meta.description,
       images: [
@@ -58,6 +110,7 @@ export function buildMetadata(locale: Locale, dict: Dictionary): Metadata {
           width: 1200,
           height: 630,
           alt: meta.ogImageAlt,
+          type: "image/png",
         },
       ],
     },
@@ -65,7 +118,10 @@ export function buildMetadata(locale: Locale, dict: Dictionary): Metadata {
       card: "summary_large_image",
       title: meta.title,
       description: meta.description,
-      images: ["/opengraph-image.png"],
+      images: {
+        url: "/opengraph-image.png",
+        alt: meta.ogImageAlt,
+      },
     },
     robots: {
       index: true,
@@ -75,47 +131,102 @@ export function buildMetadata(locale: Locale, dict: Dictionary): Metadata {
         follow: true,
         "max-image-preview": "large",
         "max-snippet": -1,
+        "max-video-preview": -1,
       },
+    },
+    other: {
+      "apple-mobile-web-app-title": siteName,
     },
   };
 }
 
 export function buildJsonLd(locale: Locale, dict: Dictionary) {
-  const url = `${siteUrl}${localePath(locale)}`;
+  const pageUrl = absoluteUrl(localePath(locale));
+  const { meta, features } = dict;
 
-  return [
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "webscount",
-      url: siteUrl,
-      logo: `${siteUrl}/images/umami-logo.png`,
-      description: dict.meta.description,
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: "webscount",
-      url,
-      inLanguage: localeHtmlLang[locale],
-      description: dict.meta.description,
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      name: "webscount",
-      applicationCategory: "BusinessApplication",
-      operatingSystem: "Web",
-      url,
-      description: dict.meta.description,
-      offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "USD",
-        description: dict.cta.description,
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${siteUrl}/#organization`,
+        name: siteName,
+        url: siteUrl,
+        logo: {
+          "@type": "ImageObject",
+          url: absoluteUrl("/images/umami-logo.png"),
+          width: 512,
+          height: 512,
+        },
+        description: meta.description,
       },
-      featureList: dict.features.items.map((item) => item.question),
-      screenshot: featureImages.map((img) => `${siteUrl}${img}`),
-    },
-  ];
+      {
+        "@type": "WebSite",
+        "@id": `${siteUrl}/#website`,
+        name: siteName,
+        url: siteUrl,
+        publisher: { "@id": `${siteUrl}/#organization` },
+        inLanguage: [localeHtmlLang.zh, localeHtmlLang.en],
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: meta.title,
+        description: meta.description,
+        isPartOf: { "@id": `${siteUrl}/#website` },
+        inLanguage: localeHtmlLang[locale],
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: absoluteUrl("/images/app.jpg"),
+        },
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": `${pageUrl}#software`,
+        name: siteName,
+        applicationCategory: "BusinessApplication",
+        applicationSubCategory: "Web Analytics",
+        operatingSystem: "Web",
+        url: cloudUrl,
+        description: meta.description,
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "USD",
+          description: dict.cta.description,
+          url: cloudUrl,
+        },
+        featureList: features.items.map((item) => item.question),
+        screenshot: featureImages.map((img) => absoluteUrl(img)),
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${pageUrl}#faq`,
+        mainEntity: features.items.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.description,
+          },
+        })),
+      },
+      {
+        "@type": "Product",
+        "@id": `${pageUrl}#product`,
+        name: siteName,
+        description: meta.description,
+        brand: { "@id": `${siteUrl}/#organization` },
+        image: absoluteUrl("/opengraph-image.png"),
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "USD",
+          availability: "https://schema.org/InStock",
+          url: cloudUrl,
+        },
+      },
+    ],
+  };
 }

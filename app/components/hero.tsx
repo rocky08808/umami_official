@@ -11,7 +11,10 @@ export function Hero({ dict }: HeroProps) {
   const { hero, trusted } = dict;
 
   return (
-    <section className="relative overflow-hidden pt-24 pb-10 md:pt-[140px] md:pb-16">
+    <section
+      aria-labelledby="hero-heading"
+      className="relative overflow-hidden pt-24 pb-10 md:pt-[140px] md:pb-16"
+    >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(0,0,0,0.05),transparent_60%)]" />
 
       <div className="relative mx-auto max-w-[1200px] px-4 md:px-6">
@@ -20,7 +23,10 @@ export function Hero({ dict }: HeroProps) {
             {hero.badge}
           </span>
 
-          <h1 className="max-w-[820px] text-[1.75rem] font-bold leading-tight tracking-tight text-balance sm:text-4xl md:text-6xl md:leading-[1.08] lg:text-[4.25rem]">
+          <h1
+            id="hero-heading"
+            className="max-w-[820px] text-[1.75rem] font-bold leading-tight tracking-tight text-balance sm:text-4xl md:text-6xl md:leading-[1.08] lg:text-[4.25rem]"
+          >
             {hero.title}
             <br />
             <span className="text-muted">{hero.titleAccent}</span>

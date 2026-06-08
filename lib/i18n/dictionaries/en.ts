@@ -2,16 +2,20 @@ import type { Dictionary } from "../types";
 
 const en: Dictionary = {
   meta: {
-    title: "webscount – Privacy-Focused Web Analytics",
+    title: "webscount – Privacy-Focused Web Analytics Platform",
     description:
-      "Powerful analytics without the complexity. Set up in minutes, get insights immediately. No cookies required.",
+      "webscount is a privacy-focused web analytics platform. Deploy in minutes, track traffic, conversions, and revenue in real time — no cookies required. A lightweight Google Analytics alternative.",
     keywords: [
-      "web analytics",
-      "privacy analytics",
-      "Google Analytics alternative",
       "webscount",
+      "web analytics",
+      "website analytics",
+      "privacy analytics",
       "cookie-free analytics",
       "website statistics",
+      "visitor analytics",
+      "Google Analytics alternative",
+      "traffic analysis",
+      "conversion tracking",
     ],
     ogImageAlt: "webscount analytics dashboard preview",
   },

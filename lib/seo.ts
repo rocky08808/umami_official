@@ -154,9 +154,7 @@ export function buildMetadata(locale: Locale, dict: Dictionary): Metadata {
   const pageUrl = absoluteUrl(localePath(locale));
 
   return {
-    title: {
-      default: meta.title,
-    },
+    title: meta.title,
     description: meta.description,
     keywords: meta.keywords,
     applicationName: siteName,

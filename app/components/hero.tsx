@@ -58,11 +58,12 @@ export function Hero({ dict }: HeroProps) {
           <div className="mx-auto w-full max-w-[860px] pt-4 md:pt-8">
             <div className="rounded-2xl bg-gradient-to-b from-black/[0.04] to-transparent p-0.5 sm:p-1">
               <Image
-                src="/images/app.jpg"
+                src="/images/app.jpg?v=3"
                 alt={hero.imageAlt}
                 width={1483}
                 height={1258}
                 priority
+                unoptimized
                 sizes="(max-width: 768px) 100vw, 860px"
                 className="h-auto w-full rounded-[12px] border border-border bg-surface shadow-elevated sm:rounded-[14px]"
               />

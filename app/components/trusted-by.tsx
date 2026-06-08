@@ -21,7 +21,8 @@ function LogoRow() {
           alt={title}
           width={120}
           height={40}
-          className="h-8 w-auto shrink-0 opacity-40 grayscale transition-opacity hover:opacity-70"
+          style={{ width: "auto", height: "2rem" }}
+          className="shrink-0 opacity-35 grayscale transition-opacity duration-300 hover:opacity-60"
         />
       ))}
     </>
@@ -30,10 +31,12 @@ function LogoRow() {
 
 export function TrustedBy() {
   return (
-    <div className="flex flex-col items-center gap-6">
-      <p className="text-sm text-muted">受到数千家公司的信赖</p>
-      <div className="relative w-full overflow-hidden mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <div className="flex w-max items-center gap-[100px] animate-scroll">
+    <div className="flex flex-col items-center gap-8">
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+        受到数千家公司的信赖
+      </p>
+      <div className="relative w-full overflow-hidden mask-[linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+        <div className="flex w-max items-center gap-16 animate-scroll md:gap-24">
           <LogoRow />
           <LogoRow />
         </div>

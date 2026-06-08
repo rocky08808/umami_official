@@ -21,22 +21,23 @@ export function FeatureSection({
   reversed = false,
 }: FeatureSectionProps) {
   return (
-    <section className="py-16 md:py-24">
+    <section className="group">
       <div
-        className={`mx-auto grid max-w-6xl items-center gap-10 px-6 md:grid-cols-2 md:gap-16 ${
+        className={`grid items-center gap-10 md:grid-cols-2 md:gap-14 lg:gap-20 ${
           reversed ? "md:[&>*:first-child]:order-2" : ""
         }`}
       >
-        <div className="space-y-5">
-          <p className="text-sm font-bold uppercase tracking-[0.24em] text-muted">
+        <div className="space-y-4 md:pr-4">
+          <h3 className="text-xl font-bold leading-snug tracking-tight md:text-2xl lg:text-[1.75rem]">
             {question}
-          </p>
-          <div className="text-base leading-relaxed text-muted md:text-lg">
+          </h3>
+          <p className="text-base leading-relaxed text-muted md:text-lg md:leading-8">
             {description}
-          </div>
+          </p>
         </div>
-        <div className="relative">
-          <div className="pointer-events-none absolute -inset-4 rounded-2xl bg-gradient-to-br from-black/[0.03] to-transparent" />
+
+        <div className="relative transition-transform duration-500 group-hover:translate-y-[-2px]">
+          <div className="pointer-events-none absolute -inset-3 rounded-3xl bg-gradient-to-br from-black/[0.04] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           <Screenshot
             src={image}
             alt={imageAlt}

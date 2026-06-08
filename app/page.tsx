@@ -3,6 +3,7 @@ import { Hero } from "./components/hero";
 import { FeatureSection } from "./components/feature-section";
 import { CTA } from "./components/cta";
 import { Footer } from "./components/footer";
+import { ButtonLink } from "./components/button";
 
 export default function Home() {
   return (
@@ -11,21 +12,21 @@ export default function Home() {
       <main>
         <Hero />
 
-        <div id="features" className="mx-auto max-w-[1000px] px-6">
-          <section className="flex flex-col items-center gap-5 py-12 text-center md:py-20">
-            <header className="text-sm font-bold uppercase tracking-[0.24em] text-muted">
+        <div id="features" className="mx-auto max-w-[1000px] px-4 md:px-6">
+          <section className="flex flex-col items-center gap-4 py-16 text-center md:py-24">
+            <span className="text-xs font-bold uppercase tracking-[0.24em] text-muted">
               更快找到答案
-            </header>
-            <h2 className="text-2xl font-bold tracking-tight md:text-3xl">
+            </span>
+            <h2 className="max-w-2xl text-3xl font-bold tracking-tight text-balance md:text-4xl">
               webscount 帮你找到需要的答案
             </h2>
-            <p className="max-w-[720px] text-lg text-muted">
+            <p className="max-w-[640px] text-lg leading-relaxed text-muted">
               从流量和营销活动到漏斗、收入和用户行为，webscount
               让你轻松了解网站动态，无需在繁杂的报表中翻找。
             </p>
           </section>
 
-          <div className="flex flex-col gap-32 md:gap-40">
+          <div className="flex flex-col gap-28 md:gap-36">
             <FeatureSection
               question="上周有多少访客？"
               description="浏览量、访客数、跳出率和平均访问时长——全部汇聚在一个仪表盘。选择任意日期范围，按国家或设备筛选，几秒钟内掌握全局。"
@@ -84,13 +85,10 @@ export default function Home() {
             />
           </div>
 
-          <div className="flex justify-center py-20">
-            <a
-              href="#features"
-              className="rounded-full border border-border-strong px-6 py-3 text-sm font-medium transition-colors hover:bg-surface"
-            >
+          <div className="flex justify-center py-20 md:py-24">
+            <ButtonLink href="https://cloud.webscount.com/" variant="outline" size="md">
               探索全部功能
-            </a>
+            </ButtonLink>
           </div>
         </div>
 

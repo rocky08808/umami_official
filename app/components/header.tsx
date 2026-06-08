@@ -1,4 +1,8 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { Logo } from "./logo";
+import { ButtonLink } from "./button";
 
 const navLinks = [
   { label: "功能", href: "#features" },
@@ -8,36 +12,54 @@ const navLinks = [
 ];
 
 export function Header() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+    <header
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+        scrolled
+          ? "border-b border-border bg-background/90 shadow-[0_1px_0_rgba(0,0,0,0.04)] backdrop-blur-xl"
+          : "border-b border-transparent bg-background/70 backdrop-blur-md"
+      }`}
+    >
+      <div className="mx-auto flex h-[70px] max-w-[1200px] items-center justify-between px-4 md:px-6">
         <Logo />
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-muted transition-colors hover:text-foreground"
+              className="rounded-lg px-3.5 py-2 text-sm text-muted transition-colors hover:bg-surface-raised/80 hover:text-foreground"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
-          <a
+        <div className="flex items-center gap-2">
+          <ButtonLink
             href="https://cloud.webscount.com/"
-            className="hidden text-sm text-muted transition-colors hover:text-foreground sm:block"
+            variant="ghost"
+            size="sm"
+            className="hidden sm:inline-flex"
           >
             登录
-          </a>
-          <a
+          </ButtonLink>
+          <ButtonLink
             href="https://cloud.webscount.com/"
-            className="rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
+            variant="primary"
+            size="sm"
           >
             免费开始
-          </a>
+          </ButtonLink>
         </div>
       </div>
     </header>

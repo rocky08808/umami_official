@@ -10,5 +10,5 @@ export function isCloudUrl(href: string | undefined): boolean {
 export function trackCloudRedirect(source: string): void {
   if (typeof window === "undefined") return;
 
-  window.umami?.track(CLOUD_REDIRECT_EVENT, { source });
+  window.webscount?.track(CLOUD_REDIRECT_EVENT, { source });
 }

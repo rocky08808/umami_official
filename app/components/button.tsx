@@ -49,8 +49,8 @@ export function ButtonLink({
       onClick={handleClick}
       {...(cloudLink
         ? {
-            "data-umami-event": CLOUD_REDIRECT_EVENT,
-            "data-umami-event-source": source,
+            "data-webscount-event": CLOUD_REDIRECT_EVENT,
+            "data-webscount-event-source": source,
           }
         : {})}
       className={`inline-flex items-center justify-center rounded-full font-medium transition-all duration-200 ${variants[variant]} ${sizes[size]} ${className}`}

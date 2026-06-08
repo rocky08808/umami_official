@@ -1,4 +1,4 @@
-interface UmamiTracker {
+interface WebscountTracker {
   track: (
     event: string | ((props: Record<string, unknown>) => Record<string, unknown>),
     data?: Record<string, unknown>,
@@ -7,7 +7,7 @@ interface UmamiTracker {
 
 declare global {
   interface Window {
-    umami?: UmamiTracker;
+    webscount?: WebscountTracker;
   }
 }
 

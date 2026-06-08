@@ -1,4 +1,5 @@
 import type { Viewport } from "next";
+import Script from "next/script";
 import { headers } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
 import { defaultLocale, localeHtmlLang, isValidLocale } from "@/lib/i18n/config";
@@ -37,6 +38,12 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
+        <Script
+          defer
+          src="https://cloud.webscount.com/script.js"
+          data-website-id="c732f9e2-0a49-4e3f-8923-4e8b8b6605aa"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

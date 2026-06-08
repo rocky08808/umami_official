@@ -14,11 +14,16 @@ export function PricingFaq({ title, items }: PricingFaqProps) {
       >
         {title}
       </h2>
-      <dl className="mx-auto mt-10 max-w-3xl divide-y divide-border">
+      <dl className="mx-auto mt-10 grid max-w-3xl gap-3 sm:gap-4">
         {items.map((item) => (
-          <div key={item.question} className="py-6">
-            <dt className="text-base font-semibold">{item.question}</dt>
-            <dd className="mt-2 text-sm leading-relaxed text-muted sm:text-base">
+          <div
+            key={item.question}
+            className="rounded-xl border border-border bg-surface px-5 py-5 shadow-card sm:px-6 sm:py-6"
+          >
+            <dt className="text-base font-semibold leading-snug">
+              {item.question}
+            </dt>
+            <dd className="mt-2.5 text-sm leading-relaxed text-muted sm:text-[15px]">
               {item.answer}
             </dd>
           </div>

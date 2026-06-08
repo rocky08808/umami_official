@@ -8,6 +8,7 @@ const pricing: PricingContent = {
   },
   title: "定价",
   subtitle: "按用量计费，简单透明",
+  compareTitle: "方案对比",
   planNames: ["Hobby", "Pro", "Business", "Enterprise"],
   plans: [
     {

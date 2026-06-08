@@ -8,19 +8,22 @@ type PricingCardsProps = {
 
 export function PricingCards({ plans }: PricingCardsProps) {
   return (
-    <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid items-stretch gap-5 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
       {plans.map((plan) => (
         <div
           key={plan.name}
-          className={`flex flex-col rounded-2xl border bg-surface p-6 shadow-card sm:p-7 ${
+          className={`relative flex flex-col rounded-2xl border bg-surface p-6 transition-shadow duration-300 sm:p-7 ${
             plan.highlighted
-              ? "border-foreground/20 ring-1 ring-foreground/10"
-              : "border-border"
+              ? "z-10 border-foreground/15 shadow-elevated xl:-translate-y-1"
+              : "border-border shadow-card hover:shadow-elevated"
           }`}
         >
-          <h3 className="text-lg font-bold">{plan.name}</h3>
-          <div className="mt-3 flex items-baseline gap-1">
-            <span className="text-3xl font-bold tracking-tight">
+          <div className="flex items-start justify-between gap-3">
+            <h3 className="text-lg font-bold tracking-tight">{plan.name}</h3>
+          </div>
+
+          <div className="mt-4 flex items-baseline gap-1">
+            <span className="text-4xl font-bold tracking-tight">
               {plan.price}
             </span>
             {plan.period && (
@@ -38,27 +41,33 @@ export function PricingCards({ plans }: PricingCardsProps) {
           </ButtonLink>
 
           {(plan.intro || plan.includes) && (
-            <p className="mt-6 text-sm font-medium text-foreground">
-              {plan.intro ?? plan.includes}
-            </p>
+            <>
+              <div className="mt-6 border-t border-border pt-6">
+                <p className="text-sm font-semibold text-foreground">
+                  {plan.intro ?? plan.includes}
+                </p>
+              </div>
+            </>
           )}
 
-          <ul className="mt-4 flex flex-1 flex-col gap-2.5">
+          <ul className="mt-4 flex flex-1 flex-col gap-3">
             {plan.features.map((feature) => (
               <li
                 key={feature}
-                className="flex gap-2 text-sm leading-relaxed text-muted"
+                className="flex gap-2.5 text-sm leading-relaxed text-muted"
               >
-                <svg
-                  className="mt-0.5 size-4 shrink-0 text-foreground"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  aria-hidden
-                >
-                  <path d="M5 13l4 4L19 7" />
-                </svg>
+                <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-surface-raised">
+                  <svg
+                    className="size-3 text-foreground"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    aria-hidden
+                  >
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                </span>
                 {feature}
               </li>
             ))}

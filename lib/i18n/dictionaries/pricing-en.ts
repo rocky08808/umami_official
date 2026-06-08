@@ -8,6 +8,7 @@ const pricing: PricingContent = {
   },
   title: "Pricing",
   subtitle: "Simple usage based pricing",
+  compareTitle: "Compare plans",
   planNames: ["Hobby", "Pro", "Business", "Enterprise"],
   plans: [
     {

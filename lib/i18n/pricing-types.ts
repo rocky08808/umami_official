@@ -31,6 +31,7 @@ export type PricingContent = {
   };
   title: string;
   subtitle: string;
+  compareTitle: string;
   planNames: [string, string, string, string];
   plans: PricingPlan[];
   comparison: ComparisonSection[];

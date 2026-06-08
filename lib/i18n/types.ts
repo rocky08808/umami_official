@@ -6,9 +6,14 @@ export type FeatureItem = {
   imageAlt: string;
 };
 
+export type FooterLink = {
+  label: string;
+  href: string;
+};
+
 export type FooterCategory = {
   title: string;
-  links: string[];
+  links: FooterLink[];
 };
 
 export type Dictionary = {

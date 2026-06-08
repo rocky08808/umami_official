@@ -5,20 +5,20 @@ const zh: Dictionary = {
   meta: {
     title: "webscount – 注重隐私的网站统计分析工具",
     description:
-      "webscount 是注重隐私的网站分析平台，几分钟完成部署，实时掌握流量、转化与收入数据，无需 Cookie，可作为 Google Analytics 的轻量替代方案。",
+      "webscount 是注重隐私的网站统计分析工具，几分钟完成部署，实时掌握流量、转化与收入数据，无需 Cookie，可作为 Google Analytics 的轻量替代方案。",
     keywords: [
       "webscount",
-      "网站分析",
+      "网站统计分析",
       "网站统计",
-      "数据分析",
-      "流量分析",
+      "网站分析",
+      "流量统计",
       "访客分析",
-      "隐私分析",
+      "隐私统计",
       "无 Cookie 统计",
       "Google Analytics 替代",
-      "网站分析工具",
+      "网站统计分析工具",
     ],
-    ogImageAlt: "webscount 网站分析仪表盘预览",
+    ogImageAlt: "webscount 网站统计分析仪表盘预览",
   },
   nav: {
     features: "功能",
@@ -93,9 +93,28 @@ const zh: Dictionary = {
     description:
       "注重隐私的网站统计分析工具，帮助你理解用户行为，无需追踪个人数据。",
     categories: [
-      { title: "产品", links: ["功能", "定价"] },
-      { title: "资源", links: ["文档", "API"] },
-      { title: "公司", links: ["关于", "隐私政策", "服务条款"] },
+      {
+        title: "产品",
+        links: [
+          { label: "功能", href: "/#features" },
+          { label: "定价", href: "/pricing" },
+        ],
+      },
+      {
+        title: "资源",
+        links: [
+          { label: "文档", href: "https://cloud.webscount.com/docs" },
+          { label: "API", href: "https://cloud.webscount.com/docs/api" },
+        ],
+      },
+      {
+        title: "公司",
+        links: [
+          { label: "关于", href: "/#features" },
+          { label: "隐私政策", href: "https://cloud.webscount.com/privacy" },
+          { label: "服务条款", href: "https://cloud.webscount.com/terms" },
+        ],
+      },
     ],
     copyright: "保留所有权利。",
   },

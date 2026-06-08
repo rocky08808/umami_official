@@ -1,9 +1,19 @@
-import type { Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { headers } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
 import { defaultLocale, localeHtmlLang, isValidLocale } from "@/lib/i18n/config";
+import { siteUrl } from "@/lib/seo";
+import { siteName } from "@/lib/site";
 import "./globals.css";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    template: `%s | ${siteName}`,
+    default: siteName,
+  },
+};
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

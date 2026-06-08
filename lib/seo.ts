@@ -6,6 +6,7 @@ import {
   type Locale,
 } from "./i18n/config";
 import type { Dictionary } from "./i18n/types";
+import type { PricingContent } from "./i18n/pricing-types";
 import { cloudUrl, siteName } from "./site";
 
 export const siteUrl =
@@ -19,6 +20,18 @@ const featureImages = [
   "/images/screenshot-user-journey.jpg",
   "/images/screenshot-revenue.jpg",
 ];
+
+const robotsDefaults: Metadata["robots"] = {
+  index: true,
+  follow: true,
+  googleBot: {
+    index: true,
+    follow: true,
+    "max-image-preview": "large",
+    "max-snippet": -1,
+    "max-video-preview": -1,
+  },
+};
 
 export function localePath(locale: Locale, path = ""): string {
   const suffix = path.startsWith("/") ? path : path ? `/${path}` : "";
@@ -72,15 +85,77 @@ function buildVerification(): Metadata["verification"] | undefined {
   };
 }
 
+type PageMeta = {
+  title: string;
+  description: string;
+  keywords?: string[];
+  ogImageAlt?: string;
+};
+
+function buildSocialMetadata(
+  locale: Locale,
+  pageUrl: string,
+  meta: PageMeta
+): Pick<Metadata, "openGraph" | "twitter"> {
+  const ogImageAlt = meta.ogImageAlt ?? `${siteName} preview`;
+
+  return {
+    openGraph: {
+      type: "website",
+      locale: locale === "zh" ? "zh_CN" : "en_US",
+      alternateLocale: locales
+        .filter((l) => l !== locale)
+        .map((l) => (l === "zh" ? "zh_CN" : "en_US")),
+      url: pageUrl,
+      siteName,
+      title: meta.title,
+      description: meta.description,
+      images: [
+        {
+          url: "/opengraph-image.png",
+          width: 1200,
+          height: 630,
+          alt: ogImageAlt,
+          type: "image/png",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: meta.title,
+      description: meta.description,
+      images: {
+        url: "/opengraph-image.png",
+        alt: ogImageAlt,
+      },
+    },
+  };
+}
+
+export function buildPageMetadata(
+  locale: Locale,
+  path: string,
+  meta: PageMeta
+): Metadata {
+  const pageUrl = absoluteUrl(localePath(locale, path));
+
+  return {
+    title: meta.title,
+    description: meta.description,
+    keywords: meta.keywords,
+    alternates: buildAlternates(locale, path),
+    robots: robotsDefaults,
+    ...buildSocialMetadata(locale, pageUrl, meta),
+  };
+}
+
 export function buildMetadata(locale: Locale, dict: Dictionary): Metadata {
   const { meta } = dict;
   const pageUrl = absoluteUrl(localePath(locale));
 
   return {
-    metadataBase: new URL(siteUrl),
     title: {
       default: meta.title,
-      template: `%s | ${siteName}`,
     },
     description: meta.description,
     keywords: meta.keywords,
@@ -105,50 +180,17 @@ export function buildMetadata(locale: Locale, dict: Dictionary): Metadata {
       ],
       apple: "/apple-touch-icon.png",
     },
-    openGraph: {
-      type: "website",
-      locale: locale === "zh" ? "zh_CN" : "en_US",
-      alternateLocale: locales
-        .filter((l) => l !== locale)
-        .map((l) => (l === "zh" ? "zh_CN" : "en_US")),
-      url: pageUrl,
-      siteName,
-      title: meta.title,
-      description: meta.description,
-      images: [
-        {
-          url: "/opengraph-image.png",
-          width: 1200,
-          height: 630,
-          alt: meta.ogImageAlt,
-          type: "image/png",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: meta.title,
-      description: meta.description,
-      images: {
-        url: "/opengraph-image.png",
-        alt: meta.ogImageAlt,
-      },
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-        "max-video-preview": -1,
-      },
-    },
+    robots: robotsDefaults,
+    ...buildSocialMetadata(locale, pageUrl, meta),
     other: {
       "apple-mobile-web-app-title": siteName,
     },
   };
+}
+
+function parsePlanPrice(price: string): number | undefined {
+  const match = price.match(/\$?([\d.]+)/);
+  return match ? Number(match[1]) : undefined;
 }
 
 export function buildJsonLd(locale: Locale, dict: Dictionary) {
@@ -178,6 +220,13 @@ export function buildJsonLd(locale: Locale, dict: Dictionary) {
         url: siteUrl,
         publisher: { "@id": `${siteUrl}/#organization` },
         inLanguage: [localeHtmlLang.zh, localeHtmlLang.en],
+        potentialAction: {
+          "@type": "ReadAction",
+          target: [
+            absoluteUrl(localePath(locale)),
+            absoluteUrl(localePath(locale, "pricing")),
+          ],
+        },
       },
       {
         "@type": "WebPage",
@@ -197,7 +246,7 @@ export function buildJsonLd(locale: Locale, dict: Dictionary) {
         "@id": `${pageUrl}#software`,
         name: siteName,
         applicationCategory: "BusinessApplication",
-        applicationSubCategory: "Web Analytics",
+        applicationSubCategory: "Website Statistics and Analytics",
         operatingSystem: "Web",
         url: cloudUrl,
         description: meta.description,
@@ -238,6 +287,101 @@ export function buildJsonLd(locale: Locale, dict: Dictionary) {
           url: cloudUrl,
         },
       },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: siteName,
+            item: pageUrl,
+          },
+        ],
+      },
+    ],
+  };
+}
+
+export function buildPricingJsonLd(
+  locale: Locale,
+  dict: Dictionary,
+  pricing: PricingContent
+) {
+  const homeUrl = absoluteUrl(localePath(locale));
+  const pageUrl = absoluteUrl(localePath(locale, "pricing"));
+  const homeLabel = locale === "zh" ? "首页" : "Home";
+
+  const offers = pricing.plans
+    .map((plan) => {
+      const price = parsePlanPrice(plan.price);
+      if (price === undefined) return null;
+
+      return {
+        "@type": "Offer",
+        name: plan.name,
+        price,
+        priceCurrency: "USD",
+        url: cloudUrl,
+        availability: "https://schema.org/InStock",
+      };
+    })
+    .filter(Boolean);
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: pricing.meta.title,
+        description: pricing.meta.description,
+        isPartOf: { "@id": `${siteUrl}/#website` },
+        inLanguage: localeHtmlLang[locale],
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: homeLabel,
+            item: homeUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: dict.nav.pricing,
+            item: pageUrl,
+          },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${pageUrl}#faq`,
+        mainEntity: pricing.faq.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      },
+      ...(offers.length
+        ? [
+            {
+              "@type": "Product",
+              "@id": `${pageUrl}#product`,
+              name: siteName,
+              description: pricing.meta.description,
+              brand: { "@id": `${siteUrl}/#organization` },
+              offers,
+            },
+          ]
+        : []),
     ],
   };
 }

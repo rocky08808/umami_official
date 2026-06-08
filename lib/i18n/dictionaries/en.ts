@@ -5,20 +5,20 @@ const en: Dictionary = {
   meta: {
     title: "webscount – Privacy-Focused Website Statistics Analytics Tool",
     description:
-      "webscount is a privacy-focused web analytics platform. Deploy in minutes, track traffic, conversions, and revenue in real time — no cookies required. A lightweight Google Analytics alternative.",
+      "webscount is a privacy-focused website statistics analytics tool. Deploy in minutes, track traffic, conversions, and revenue in real time — no cookies required. A lightweight Google Analytics alternative.",
     keywords: [
       "webscount",
+      "website statistics analytics",
       "web analytics",
-      "website analytics",
+      "website statistics",
       "privacy analytics",
       "cookie-free analytics",
-      "website statistics",
       "visitor analytics",
       "Google Analytics alternative",
       "traffic analysis",
       "conversion tracking",
     ],
-    ogImageAlt: "webscount analytics dashboard preview",
+    ogImageAlt: "webscount website statistics analytics dashboard",
   },
   nav: {
     features: "Features",
@@ -95,9 +95,28 @@ const en: Dictionary = {
     description:
       "Privacy-focused website statistics analytics tool that helps you understand user behavior without tracking personal data.",
     categories: [
-      { title: "Product", links: ["Features", "Pricing"] },
-      { title: "Resources", links: ["Docs", "API"] },
-      { title: "Company", links: ["About", "Privacy", "Terms"] },
+      {
+        title: "Product",
+        links: [
+          { label: "Features", href: "/#features" },
+          { label: "Pricing", href: "/pricing" },
+        ],
+      },
+      {
+        title: "Resources",
+        links: [
+          { label: "Docs", href: "https://cloud.webscount.com/docs" },
+          { label: "API", href: "https://cloud.webscount.com/docs/api" },
+        ],
+      },
+      {
+        title: "Company",
+        links: [
+          { label: "About", href: "/#features" },
+          { label: "Privacy", href: "https://cloud.webscount.com/privacy" },
+          { label: "Terms", href: "https://cloud.webscount.com/terms" },
+        ],
+      },
     ],
     copyright: "All rights reserved.",
   },

@@ -5,10 +5,10 @@ import { siteName } from "@/lib/site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${siteName} – Privacy-Focused Web Analytics`,
+    name: `${siteName} – Website Statistics Analytics`,
     short_name: siteName,
     description:
-      "Powerful analytics without the complexity. Privacy-focused web analytics with no cookies required.",
+      "Privacy-focused website statistics analytics tool. Track traffic and conversions without cookies.",
     start_url: `${siteUrl}${localePath(defaultLocale)}`,
     scope: siteUrl,
     display: "standalone",

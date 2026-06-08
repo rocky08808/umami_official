@@ -9,7 +9,8 @@ import { PricingFaq } from "@/app/components/pricing/pricing-faq";
 import { ScrollReveal } from "@/app/components/scroll-reveal";
 import { isValidLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
-import { buildAlternates } from "@/lib/seo";
+import { JsonLd } from "@/app/components/json-ld";
+import { buildPageMetadata, buildPricingJsonLd } from "@/lib/seo";
 import { cloudUrl } from "@/lib/site";
 
 type PageProps = {
@@ -23,13 +24,8 @@ export async function generateMetadata({
   if (!isValidLocale(locale)) return {};
 
   const dict = await getDictionary(locale);
-  const { meta } = dict.pricing;
 
-  return {
-    title: meta.title,
-    description: meta.description,
-    alternates: buildAlternates(locale, "pricing"),
-  };
+  return buildPageMetadata(locale, "pricing", dict.pricing.meta);
 }
 
 export default async function PricingPage({ params }: PageProps) {
@@ -41,6 +37,7 @@ export default async function PricingPage({ params }: PageProps) {
 
   return (
     <div className="min-h-full bg-background text-foreground">
+      <JsonLd data={buildPricingJsonLd(locale, dict, pricing)} />
       <Header locale={locale} dict={dict} />
       <main id="main-content">
         <section className="relative overflow-hidden pt-24 pb-10 md:pt-[140px] md:pb-14">

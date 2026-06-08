@@ -2,9 +2,17 @@ import type { PricingContent } from "../pricing-types";
 
 const pricing: PricingContent = {
   meta: {
-    title: "定价",
+    title: "定价 – webscount 网站统计分析工具",
     description:
-      "webscount 按用量计费，简单透明。免费 Hobby 起步，Pro 与 Business 随业务扩展，Enterprise 可联系我们定制方案。",
+      "webscount 按用量计费，简单透明。免费 Hobby 起步，Pro $20/月起，Business $200/月起。注重隐私、无需 Cookie 的网站统计分析方案。",
+    keywords: [
+      "webscount 定价",
+      "网站统计价格",
+      "网站分析收费",
+      "隐私统计方案",
+      "Google Analytics 替代定价",
+    ],
+    ogImageAlt: "webscount 定价方案",
   },
   title: "定价",
   subtitle: "按用量计费，简单透明",

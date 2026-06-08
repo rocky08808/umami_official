@@ -8,6 +8,12 @@ type FooterProps = {
   dict: Dictionary;
 };
 
+function resolveFooterHref(locale: Locale, href: string): string {
+  if (href.startsWith("http")) return href;
+  if (href.startsWith("#")) return `/${locale}${href}`;
+  return `/${locale}${href.startsWith("/") ? href : `/${href}`}`;
+}
+
 export function Footer({ locale, dict }: FooterProps) {
   const { footer } = dict;
 
@@ -27,16 +33,24 @@ export function Footer({ locale, dict }: FooterProps) {
             <div key={category.title}>
               <p className="text-sm font-semibold">{category.title}</p>
               <ul className="mt-3 space-y-2.5 md:mt-4 md:space-y-3">
-                {category.links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="inline-flex min-h-10 items-center text-sm text-muted transition-colors hover:text-foreground"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
+                {category.links.map((link) => {
+                  const resolved = resolveFooterHref(locale, link.href);
+                  const external = link.href.startsWith("http");
+
+                  return (
+                    <li key={link.label}>
+                      <a
+                        href={resolved}
+                        {...(external
+                          ? { rel: "noopener noreferrer", target: "_blank" }
+                          : {})}
+                        className="inline-flex min-h-10 items-center text-sm text-muted transition-colors hover:text-foreground"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

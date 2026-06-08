@@ -28,6 +28,8 @@ export type PricingContent = {
   meta: {
     title: string;
     description: string;
+    keywords: string[];
+    ogImageAlt: string;
   };
   title: string;
   subtitle: string;

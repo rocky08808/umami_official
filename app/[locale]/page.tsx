@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Header } from "../components/header";
 import { Hero } from "../components/hero";
@@ -9,7 +10,7 @@ import { JsonLd } from "../components/json-ld";
 import { ScrollReveal } from "../components/scroll-reveal";
 import { isValidLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
-import { buildJsonLd } from "@/lib/seo";
+import { buildJsonLd, buildMetadata } from "@/lib/seo";
 import { cloudUrl } from "@/lib/site";
 
 const featureImages = [
@@ -24,6 +25,16 @@ const featureImages = [
 type PageProps = {
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isValidLocale(locale)) return {};
+
+  const dict = await getDictionary(locale);
+  return buildMetadata(locale, dict);
+}
 
 export default async function Home({ params }: PageProps) {
   const { locale } = await params;

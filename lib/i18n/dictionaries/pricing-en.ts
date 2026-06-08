@@ -2,9 +2,17 @@ import type { PricingContent } from "../pricing-types";
 
 const pricing: PricingContent = {
   meta: {
-    title: "Pricing",
+    title: "Pricing – webscount Website Statistics Analytics",
     description:
-      "Simple usage-based pricing for webscount. Start free with Hobby, scale with Pro and Business, or contact us for Enterprise.",
+      "Simple usage-based pricing for webscount. Free Hobby plan, Pro from $20/mo, Business from $200/mo. Privacy-focused website statistics with no cookies required.",
+    keywords: [
+      "webscount pricing",
+      "website analytics pricing",
+      "web statistics plans",
+      "privacy analytics cost",
+      "Google Analytics alternative pricing",
+    ],
+    ogImageAlt: "webscount pricing plans",
   },
   title: "Pricing",
   subtitle: "Simple usage based pricing",

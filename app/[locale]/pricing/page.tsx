@@ -88,6 +88,7 @@ export default async function PricingPage({ params }: PageProps) {
                   </h2>
                   <ButtonLink
                     href={cloudUrl}
+                    trackSource="pricing-cta"
                     variant="outline"
                     size="lg"
                     className="mt-6 w-full max-w-sm border-white/20 bg-white text-foreground hover:bg-white/90 sm:mt-8 sm:w-auto"

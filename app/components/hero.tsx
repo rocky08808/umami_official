@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Dictionary } from "@/lib/i18n/types";
 import { TrustedBy } from "./trusted-by";
+import { cloudUrl } from "@/lib/site";
 import { ButtonLink } from "./button";
 
 type HeroProps = {
@@ -38,7 +39,8 @@ export function Hero({ dict }: HeroProps) {
 
           <div className="flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
             <ButtonLink
-              href="https://cloud.webscount.com/"
+              href={cloudUrl}
+              trackSource="hero-primary"
               variant="primary"
               size="lg"
               className="w-full sm:w-auto"

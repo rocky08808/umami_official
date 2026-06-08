@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
+import { cloudUrl } from "@/lib/site";
 import { ButtonLink } from "./button";
 import { LanguageSwitcher } from "./language-switcher";
 
@@ -60,7 +61,8 @@ export function MobileMenu({
             <LanguageSwitcher locale={locale} />
           </div>
           <ButtonLink
-            href="https://cloud.webscount.com/"
+            href={cloudUrl}
+            trackSource="mobile-login"
             variant="outline"
             size="md"
             className="w-full"
@@ -68,7 +70,8 @@ export function MobileMenu({
             {nav.login}
           </ButtonLink>
           <ButtonLink
-            href="https://cloud.webscount.com/"
+            href={cloudUrl}
+            trackSource="mobile-signup"
             variant="primary"
             size="md"
             className="w-full"

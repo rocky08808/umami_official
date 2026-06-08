@@ -1,8 +1,12 @@
-import type { ComponentProps } from "react";
+"use client";
+
+import type { ComponentProps, MouseEvent } from "react";
+import { CLOUD_REDIRECT_EVENT, isCloudUrl, trackCloudRedirect } from "@/lib/analytics";
 
 type ButtonLinkProps = ComponentProps<"a"> & {
   variant?: "primary" | "outline" | "ghost";
   size?: "sm" | "md" | "lg";
+  trackSource?: string;
 };
 
 const variants = {
@@ -23,11 +27,32 @@ export function ButtonLink({
   variant = "primary",
   size = "md",
   className = "",
+  trackSource,
+  href,
+  onClick,
   children,
   ...props
 }: ButtonLinkProps) {
+  const cloudLink = isCloudUrl(href);
+  const source = trackSource ?? "cloud";
+
+  function handleClick(event: MouseEvent<HTMLAnchorElement>) {
+    if (cloudLink) {
+      trackCloudRedirect(source);
+    }
+    onClick?.(event);
+  }
+
   return (
     <a
+      href={href}
+      onClick={handleClick}
+      {...(cloudLink
+        ? {
+            "data-umami-event": CLOUD_REDIRECT_EVENT,
+            "data-umami-event-source": source,
+          }
+        : {})}
       className={`inline-flex items-center justify-center rounded-full font-medium transition-all duration-200 ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     >

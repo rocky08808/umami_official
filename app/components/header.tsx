@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/types";
+import { cloudUrl } from "@/lib/site";
 import { Logo } from "./logo";
 import { ButtonLink } from "./button";
 import { LanguageSwitcher } from "./language-switcher";
@@ -68,7 +69,8 @@ export function Header({ locale, dict }: HeaderProps) {
               <LanguageSwitcher locale={locale} />
             </div>
             <ButtonLink
-              href="https://cloud.webscount.com/"
+              href={cloudUrl}
+              trackSource="header-login"
               variant="ghost"
               size="sm"
               className="hidden md:inline-flex"
@@ -76,7 +78,8 @@ export function Header({ locale, dict }: HeaderProps) {
               {nav.login}
             </ButtonLink>
             <ButtonLink
-              href="https://cloud.webscount.com/"
+              href={cloudUrl}
+              trackSource="header-signup"
               variant="primary"
               size="sm"
               className="hidden md:inline-flex"

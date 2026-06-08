@@ -1,4 +1,5 @@
 import type { Dictionary } from "@/lib/i18n/types";
+import { cloudUrl } from "@/lib/site";
 import { ButtonLink } from "./button";
 import { ScrollReveal } from "./scroll-reveal";
 
@@ -23,7 +24,8 @@ export function CTA({ dict }: CTAProps) {
               {cta.description}
             </p>
             <ButtonLink
-              href="https://cloud.webscount.com/"
+              href={cloudUrl}
+              trackSource="home-cta"
               variant="outline"
               size="lg"
               className="mt-6 w-full max-w-sm border-white/20 bg-white text-foreground hover:bg-white/90 sm:mt-8 sm:w-auto"

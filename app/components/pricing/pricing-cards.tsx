@@ -33,6 +33,7 @@ export function PricingCards({ plans }: PricingCardsProps) {
 
           <ButtonLink
             href={cloudUrl}
+            trackSource={`pricing-${plan.name.toLowerCase()}`}
             variant={plan.highlighted ? "primary" : "outline"}
             size="md"
             className="mt-6 w-full"

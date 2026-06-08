@@ -10,6 +10,7 @@ import { ScrollReveal } from "../components/scroll-reveal";
 import { isValidLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { buildJsonLd } from "@/lib/seo";
+import { cloudUrl } from "@/lib/site";
 
 const featureImages = [
   "/images/screenshot-dashboard.jpg",
@@ -78,12 +79,13 @@ export default async function Home({ params }: PageProps) {
 
           <ScrollReveal>
             <div className="flex justify-center px-2 py-14 sm:py-20 md:py-24">
-              <ButtonLink
-                href="https://cloud.webscount.com/"
-                variant="outline"
-                size="md"
-                className="w-full max-w-xs sm:w-auto"
-              >
+            <ButtonLink
+              href={cloudUrl}
+              trackSource="features-explore"
+              variant="outline"
+              size="md"
+              className="w-full max-w-xs sm:w-auto"
+            >
                 {features.explore}
               </ButtonLink>
             </div>

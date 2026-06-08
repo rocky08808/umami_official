@@ -22,7 +22,7 @@ export function Header({ locale, dict }: HeaderProps) {
   const navLinks = [
     { label: nav.features, href: `/${locale}#features` },
     { label: nav.pricing, href: `/${locale}/pricing` },
-    { label: nav.docs, href: "#docs" },
+    { label: nav.docs, href: `/${locale}/docs` },
   ];
 
   useEffect(() => {

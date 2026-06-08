@@ -1,4 +1,5 @@
 import type { Dictionary } from "../types";
+import docs from "./docs-zh";
 import pricing from "./pricing-zh";
 
 const zh: Dictionary = {
@@ -103,7 +104,7 @@ const zh: Dictionary = {
       {
         title: "资源",
         links: [
-          { label: "文档", href: "https://cloud.webscount.com/docs" },
+          { label: "文档", href: "/docs" },
           { label: "API", href: "https://cloud.webscount.com/docs/api" },
         ],
       },
@@ -119,6 +120,7 @@ const zh: Dictionary = {
     copyright: "保留所有权利。",
   },
   pricing,
+  docs,
 };
 
 export default zh;

@@ -1,3 +1,4 @@
+import type { DocsContent } from "./docs-types";
 import type { PricingContent } from "./pricing-types";
 
 export type FeatureItem = {
@@ -60,4 +61,5 @@ export type Dictionary = {
     copyright: string;
   };
   pricing: PricingContent;
+  docs: DocsContent;
 };

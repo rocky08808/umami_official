@@ -1,4 +1,5 @@
 import type { Dictionary } from "../types";
+import docs from "./docs-en";
 import pricing from "./pricing-en";
 
 const en: Dictionary = {
@@ -105,7 +106,7 @@ const en: Dictionary = {
       {
         title: "Resources",
         links: [
-          { label: "Docs", href: "https://cloud.webscount.com/docs" },
+          { label: "Docs", href: "/docs" },
           { label: "API", href: "https://cloud.webscount.com/docs/api" },
         ],
       },
@@ -121,6 +122,7 @@ const en: Dictionary = {
     copyright: "All rights reserved.",
   },
   pricing,
+  docs,
 };
 
 export default en;

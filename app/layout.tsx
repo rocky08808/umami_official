@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
 import { defaultLocale, localeHtmlLang, isValidLocale } from "@/lib/i18n/config";
 import { siteUrl } from "@/lib/seo";
-import { siteName } from "@/lib/site";
+import { analyticsScriptUrl, siteName } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -50,7 +50,7 @@ export default async function RootLayout({
         {children}
         <Script
           defer
-          src="https://cloud.webscount.com/script.js"
+          src={analyticsScriptUrl}
           data-website-id="c732f9e2-0a49-4e3f-8923-4e8b8b6605aa"
           strategy="afterInteractive"
         />

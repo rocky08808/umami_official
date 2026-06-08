@@ -6,6 +6,7 @@ import {
   type Locale,
 } from "./i18n/config";
 import type { Dictionary } from "./i18n/types";
+import type { DocsContent } from "./i18n/docs-types";
 import type { PricingContent } from "./i18n/pricing-types";
 import { cloudUrl, siteName } from "./site";
 
@@ -223,6 +224,7 @@ export function buildJsonLd(locale: Locale, dict: Dictionary) {
           target: [
             absoluteUrl(localePath(locale)),
             absoluteUrl(localePath(locale, "pricing")),
+            absoluteUrl(localePath(locale, "docs")),
           ],
         },
       },
@@ -380,6 +382,61 @@ export function buildPricingJsonLd(
             },
           ]
         : []),
+    ],
+  };
+}
+
+export function buildDocsJsonLd(
+  locale: Locale,
+  dict: Dictionary,
+  docs: DocsContent
+) {
+  const homeUrl = absoluteUrl(localePath(locale));
+  const pageUrl = absoluteUrl(localePath(locale, "docs"));
+  const homeLabel = locale === "zh" ? "首页" : "Home";
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: docs.meta.title,
+        description: docs.meta.description,
+        isPartOf: { "@id": `${siteUrl}/#website` },
+        inLanguage: localeHtmlLang[locale],
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: homeLabel,
+            item: homeUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: dict.nav.docs,
+            item: pageUrl,
+          },
+        ],
+      },
+      {
+        "@type": "HowTo",
+        "@id": `${pageUrl}#howto`,
+        name: docs.title,
+        description: docs.subtitle,
+        step: docs.steps.map((step, index) => ({
+          "@type": "HowToStep",
+          position: index + 1,
+          name: step.title,
+          text: step.description,
+        })),
+      },
     ],
   };
 }

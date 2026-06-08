@@ -23,7 +23,6 @@ const en: Dictionary = {
     features: "Features",
     pricing: "Pricing",
     docs: "Docs",
-    blog: "Blog",
     login: "Log in",
     signup: "Get started",
   },
@@ -95,12 +94,11 @@ const en: Dictionary = {
     description:
       "Privacy-focused web analytics that helps you understand user behavior without tracking personal data.",
     categories: [
-      { title: "Product", links: ["Features", "Pricing", "Changelog", "Roadmap"] },
-      { title: "Resources", links: ["Docs", "Blog", "API", "Community"] },
-      { title: "Company", links: ["About", "Careers", "Privacy", "Terms"] },
+      { title: "Product", links: ["Features", "Pricing"] },
+      { title: "Resources", links: ["Docs", "API"] },
+      { title: "Company", links: ["About", "Privacy", "Terms"] },
     ],
     copyright: "All rights reserved.",
-    social: ["Twitter", "GitHub", "Discord"],
   },
 };
 

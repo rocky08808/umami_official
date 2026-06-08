@@ -42,21 +42,10 @@ export function Footer({ locale, dict }: FooterProps) {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:mt-14 sm:flex-row">
+        <div className="mt-10 border-t border-border pt-8 md:mt-14">
           <p className="text-center text-sm text-muted sm:text-left">
             © {new Date().getFullYear()} webscount. {footer.copyright}
           </p>
-          <div className="flex gap-5 sm:gap-6">
-            {footer.social.map((name) => (
-              <a
-                key={name}
-                href="#"
-                className="inline-flex min-h-10 items-center text-sm text-muted transition-colors hover:text-foreground"
-              >
-                {name}
-              </a>
-            ))}
-          </div>
         </div>
       </div>
     </footer>

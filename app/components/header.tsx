@@ -22,7 +22,6 @@ export function Header({ locale, dict }: HeaderProps) {
     { label: nav.features, href: "#features" },
     { label: nav.pricing, href: "#pricing" },
     { label: nav.docs, href: "#docs" },
-    { label: nav.blog, href: "#blog" },
   ];
 
   useEffect(() => {

@@ -20,7 +20,6 @@ export type Dictionary = {
     features: string;
     pricing: string;
     docs: string;
-    blog: string;
     login: string;
     signup: string;
   };
@@ -52,6 +51,5 @@ export type Dictionary = {
     description: string;
     categories: FooterCategory[];
     copyright: string;
-    social: string[];
   };
 };

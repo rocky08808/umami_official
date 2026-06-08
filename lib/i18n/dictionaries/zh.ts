@@ -23,7 +23,6 @@ const zh: Dictionary = {
     features: "功能",
     pricing: "定价",
     docs: "文档",
-    blog: "博客",
     login: "登录",
     signup: "免费开始",
   },
@@ -93,12 +92,11 @@ const zh: Dictionary = {
     description:
       "注重隐私的网站分析工具，帮助你理解用户行为，无需追踪个人数据。",
     categories: [
-      { title: "产品", links: ["功能", "定价", "更新日志", "路线图"] },
-      { title: "资源", links: ["文档", "博客", "API", "社区"] },
-      { title: "公司", links: ["关于", "招聘", "隐私政策", "服务条款"] },
+      { title: "产品", links: ["功能", "定价"] },
+      { title: "资源", links: ["文档", "API"] },
+      { title: "公司", links: ["关于", "隐私政策", "服务条款"] },
     ],
     copyright: "保留所有权利。",
-    social: ["Twitter", "GitHub", "Discord"],
   },
 };
 

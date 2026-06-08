@@ -1,18 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { Locale } from "@/lib/i18n/config";
+import type { Dictionary } from "@/lib/i18n/types";
 import { Logo } from "./logo";
 import { ButtonLink } from "./button";
+import { LanguageSwitcher } from "./language-switcher";
 
-const navLinks = [
-  { label: "功能", href: "#features" },
-  { label: "定价", href: "#pricing" },
-  { label: "文档", href: "#docs" },
-  { label: "博客", href: "#blog" },
-];
+type HeaderProps = {
+  locale: Locale;
+  dict: Dictionary;
+};
 
-export function Header() {
+export function Header({ locale, dict }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
+  const { nav } = dict;
+
+  const navLinks = [
+    { label: nav.features, href: "#features" },
+    { label: nav.pricing, href: "#pricing" },
+    { label: nav.docs, href: "#docs" },
+    { label: nav.blog, href: "#blog" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -29,8 +38,8 @@ export function Header() {
           : "border-b border-transparent bg-background/70 backdrop-blur-md"
       }`}
     >
-      <div className="mx-auto flex h-[70px] max-w-[1200px] items-center justify-between px-4 md:px-6">
-        <Logo />
+      <div className="mx-auto flex h-[70px] max-w-[1200px] items-center justify-between gap-3 px-4 md:px-6">
+        <Logo locale={locale} />
 
         <nav className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (
@@ -45,20 +54,21 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <LanguageSwitcher locale={locale} />
           <ButtonLink
             href="https://cloud.webscount.com/"
             variant="ghost"
             size="sm"
             className="hidden sm:inline-flex"
           >
-            登录
+            {nav.login}
           </ButtonLink>
           <ButtonLink
             href="https://cloud.webscount.com/"
             variant="primary"
             size="sm"
           >
-            免费开始
+            {nav.signup}
           </ButtonLink>
         </div>
       </div>

@@ -11,6 +11,10 @@ const companies = [
   { name: "vsp", title: "VSP" },
 ];
 
+type TrustedByProps = {
+  label: string;
+};
+
 function LogoRow() {
   return (
     <>
@@ -29,11 +33,11 @@ function LogoRow() {
   );
 }
 
-export function TrustedBy() {
+export function TrustedBy({ label }: TrustedByProps) {
   return (
     <div className="flex flex-col items-center gap-8">
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-        受到数千家公司的信赖
+        {label}
       </p>
       <div className="relative w-full overflow-hidden mask-[linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
         <div className="flex w-max items-center gap-16 animate-scroll md:gap-24">

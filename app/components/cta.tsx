@@ -1,6 +1,13 @@
+import type { Dictionary } from "@/lib/i18n/types";
 import { ButtonLink } from "./button";
 
-export function CTA() {
+type CTAProps = {
+  dict: Dictionary;
+};
+
+export function CTA({ dict }: CTAProps) {
+  const { cta } = dict;
+
   return (
     <section className="py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-4 md:px-6">
@@ -8,10 +15,10 @@ export function CTA() {
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.12),transparent_55%)]" />
           <div className="relative">
             <h2 className="text-3xl font-bold tracking-tight text-background md:text-4xl">
-              立即体验 webscount
+              {cta.title}
             </h2>
             <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-background/70 md:text-lg">
-              14 天免费试用，无需信用卡。几分钟内即可看到第一批数据。
+              {cta.description}
             </p>
             <ButtonLink
               href="https://cloud.webscount.com/"
@@ -19,7 +26,7 @@ export function CTA() {
               size="lg"
               className="mt-8 border-white/20 bg-white text-foreground hover:bg-white/90"
             >
-              开始 14 天免费试用
+              {cta.button}
             </ButtonLink>
           </div>
         </div>

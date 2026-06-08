@@ -1,13 +1,15 @@
 import Link from "next/link";
+import type { Locale } from "@/lib/i18n/config";
 
 type LogoProps = {
+  locale: Locale;
   className?: string;
   showText?: boolean;
 };
 
-export function Logo({ className = "", showText = true }: LogoProps) {
+export function Logo({ locale, className = "", showText = true }: LogoProps) {
   return (
-    <Link href="/" className={`flex items-center gap-2 ${className}`}>
+    <Link href={`/${locale}`} className={`flex items-center gap-2 ${className}`}>
       <span className="flex size-5 items-center justify-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"

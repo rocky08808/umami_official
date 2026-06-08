@@ -1,5 +1,7 @@
-import type { Metadata, Viewport } from "next";
+import type { Viewport } from "next";
+import { headers } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
+import { defaultLocale, localeHtmlLang, isValidLocale } from "@/lib/i18n/config";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,38 +14,24 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "webscount – 注重隐私的网站分析",
-  description:
-    "强大的数据分析，无需复杂配置。几分钟完成部署，立即获取洞察，无需 Cookie。",
-  icons: {
-    icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/images/umami-logo.png", sizes: "512x512", type: "image/png" },
-    ],
-    apple: "/apple-touch-icon.png",
-  },
-  openGraph: {
-    title: "webscount – 注重隐私的网站分析",
-    description:
-      "强大的数据分析，无需复杂配置。几分钟完成部署，立即获取洞察，无需 Cookie。",
-    images: ["/opengraph-image.png"],
-  },
-};
-
 export const viewport: Viewport = {
   themeColor: "#fafafa",
+  width: "device-width",
+  initialScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const localeHeader = headersList.get("x-locale") ?? defaultLocale;
+  const locale = isValidLocale(localeHeader) ? localeHeader : defaultLocale;
+
   return (
     <html
-      lang="zh-CN"
+      lang={localeHtmlLang[locale]}
       className={`${geistSans.variable} ${geistMono.variable} h-full bg-background text-foreground antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">

@@ -3,7 +3,7 @@ import pricing from "./pricing-zh";
 
 const zh: Dictionary = {
   meta: {
-    title: "webscount – 注重隐私的网站分析工具",
+    title: "webscount – 注重隐私的网站统计分析工具",
     description:
       "webscount 是注重隐私的网站分析平台，几分钟完成部署，实时掌握流量、转化与收入数据，无需 Cookie，可作为 Google Analytics 的轻量替代方案。",
     keywords: [
@@ -91,7 +91,7 @@ const zh: Dictionary = {
   },
   footer: {
     description:
-      "注重隐私的网站分析工具，帮助你理解用户行为，无需追踪个人数据。",
+      "注重隐私的网站统计分析工具，帮助你理解用户行为，无需追踪个人数据。",
     categories: [
       { title: "产品", links: ["功能", "定价"] },
       { title: "资源", links: ["文档", "API"] },

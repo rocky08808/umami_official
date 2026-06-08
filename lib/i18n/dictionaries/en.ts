@@ -3,7 +3,7 @@ import pricing from "./pricing-en";
 
 const en: Dictionary = {
   meta: {
-    title: "webscount – Privacy-Focused Web Analytics Platform",
+    title: "webscount – Privacy-Focused Website Statistics Analytics Tool",
     description:
       "webscount is a privacy-focused web analytics platform. Deploy in minutes, track traffic, conversions, and revenue in real time — no cookies required. A lightweight Google Analytics alternative.",
     keywords: [
@@ -93,7 +93,7 @@ const en: Dictionary = {
   },
   footer: {
     description:
-      "Privacy-focused web analytics that helps you understand user behavior without tracking personal data.",
+      "Privacy-focused website statistics analytics tool that helps you understand user behavior without tracking personal data.",
     categories: [
       { title: "Product", links: ["Features", "Pricing"] },
       { title: "Resources", links: ["Docs", "API"] },

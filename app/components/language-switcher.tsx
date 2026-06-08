@@ -24,7 +24,7 @@ export function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
           key={l}
           href={switchedPath(l)}
           hrefLang={l}
-          className={`rounded-full px-2.5 py-1 transition-colors ${
+          className={`inline-flex min-h-9 min-w-11 items-center justify-center rounded-full px-3 transition-colors ${
             locale === l
               ? "bg-foreground text-background"
               : "text-muted hover:text-foreground"

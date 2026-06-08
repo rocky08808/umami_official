@@ -22,22 +22,26 @@ export function FeatureSection({
 }: FeatureSectionProps) {
   return (
     <section className="group">
-      <div
-        className={`grid items-center gap-10 md:grid-cols-2 md:gap-14 lg:gap-20 ${
-          reversed ? "md:[&>*:first-child]:order-2" : ""
-        }`}
-      >
-        <div className="space-y-4 md:pr-4">
-          <h3 className="text-xl font-bold leading-snug tracking-tight md:text-2xl lg:text-[1.75rem]">
+      <div className="grid items-center gap-6 md:grid-cols-2 md:gap-14 lg:gap-20">
+        <div
+          className={`order-2 space-y-3 md:order-none md:space-y-4 md:pr-4 ${
+            reversed ? "md:order-2" : ""
+          }`}
+        >
+          <h3 className="text-lg font-bold leading-snug tracking-tight sm:text-xl md:text-2xl lg:text-[1.75rem]">
             {question}
           </h3>
-          <p className="text-base leading-relaxed text-muted md:text-lg md:leading-8">
+          <p className="text-sm leading-relaxed text-muted sm:text-base md:text-lg md:leading-8">
             {description}
           </p>
         </div>
 
-        <div className="relative transition-transform duration-500 group-hover:translate-y-[-2px]">
-          <div className="pointer-events-none absolute -inset-3 rounded-3xl bg-gradient-to-br from-black/[0.04] to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        <div
+          className={`relative order-1 transition-transform duration-500 md:order-none md:group-hover:translate-y-[-2px] ${
+            reversed ? "md:order-1" : ""
+          }`}
+        >
+          <div className="pointer-events-none absolute -inset-2 rounded-3xl bg-gradient-to-br from-black/[0.04] to-transparent opacity-0 transition-opacity duration-500 md:-inset-3 md:group-hover:opacity-100" />
           <Screenshot
             src={image}
             alt={imageAlt}

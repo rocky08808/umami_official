@@ -38,19 +38,19 @@ export default async function Home({ params }: PageProps) {
         <Hero dict={dict} />
 
         <div id="features" className="mx-auto max-w-[1000px] px-4 md:px-6">
-          <section className="flex flex-col items-center gap-4 py-16 text-center md:py-24">
-            <span className="text-xs font-bold uppercase tracking-[0.24em] text-muted">
+          <section className="flex flex-col items-center gap-3 px-1 py-12 text-center sm:gap-4 sm:py-16 md:py-24">
+            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted sm:text-xs sm:tracking-[0.24em]">
               {features.eyebrow}
             </span>
-            <h2 className="max-w-2xl text-3xl font-bold tracking-tight text-balance md:text-4xl">
+            <h2 className="max-w-2xl text-2xl font-bold tracking-tight text-balance sm:text-3xl md:text-4xl">
               {features.title}
             </h2>
-            <p className="max-w-[640px] text-lg leading-relaxed text-muted">
+            <p className="max-w-[640px] text-base leading-relaxed text-muted sm:text-lg">
               {features.description}
             </p>
           </section>
 
-          <div className="flex flex-col gap-28 md:gap-36">
+          <div className="flex flex-col gap-16 sm:gap-24 md:gap-36">
             {features.items.map((item, index) => (
               <FeatureSection
                 key={item.question}
@@ -65,11 +65,12 @@ export default async function Home({ params }: PageProps) {
             ))}
           </div>
 
-          <div className="flex justify-center py-20 md:py-24">
+          <div className="flex justify-center px-2 py-14 sm:py-20 md:py-24">
             <ButtonLink
               href="https://cloud.webscount.com/"
               variant="outline"
               size="md"
+              className="w-full max-w-xs sm:w-auto"
             >
               {features.explore}
             </ButtonLink>

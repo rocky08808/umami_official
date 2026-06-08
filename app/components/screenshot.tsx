@@ -10,7 +10,7 @@ type ScreenshotProps = {
 
 export function Screenshot({ src, alt, width, height, priority }: ScreenshotProps) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
+    <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-card sm:rounded-2xl">
       <Image
         src={src}
         alt={alt}

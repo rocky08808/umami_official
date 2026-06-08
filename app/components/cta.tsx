@@ -9,22 +9,22 @@ export function CTA({ dict }: CTAProps) {
   const { cta } = dict;
 
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-14 md:py-28">
       <div className="mx-auto max-w-[1200px] px-4 md:px-6">
-        <div className="relative overflow-hidden rounded-3xl bg-foreground px-8 py-16 text-center md:px-16 md:py-20">
+        <div className="relative overflow-hidden rounded-2xl bg-foreground px-5 py-12 text-center sm:rounded-3xl sm:px-8 sm:py-16 md:px-16 md:py-20">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.12),transparent_55%)]" />
           <div className="relative">
-            <h2 className="text-3xl font-bold tracking-tight text-background md:text-4xl">
+            <h2 className="text-2xl font-bold tracking-tight text-background sm:text-3xl md:text-4xl">
               {cta.title}
             </h2>
-            <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-background/70 md:text-lg">
+            <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-background/70 sm:mt-4 sm:text-base md:text-lg">
               {cta.description}
             </p>
             <ButtonLink
               href="https://cloud.webscount.com/"
               variant="outline"
               size="lg"
-              className="mt-8 border-white/20 bg-white text-foreground hover:bg-white/90"
+              className="mt-6 w-full max-w-sm border-white/20 bg-white text-foreground hover:bg-white/90 sm:mt-8 sm:w-auto"
             >
               {cta.button}
             </ButtonLink>

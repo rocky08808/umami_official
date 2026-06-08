@@ -21,7 +21,7 @@ function LogoRow() {
           alt={title}
           width={120}
           height={40}
-          className="h-8 w-auto shrink-0 opacity-50 brightness-0 invert transition-opacity hover:opacity-80"
+          className="h-8 w-auto shrink-0 opacity-40 grayscale transition-opacity hover:opacity-70"
         />
       ))}
     </>

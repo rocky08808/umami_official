@@ -36,7 +36,7 @@ export function FeatureSection({
           </div>
         </div>
         <div className="relative">
-          <div className="pointer-events-none absolute -inset-4 rounded-2xl bg-gradient-to-br from-white/[0.04] to-transparent" />
+          <div className="pointer-events-none absolute -inset-4 rounded-2xl bg-gradient-to-br from-black/[0.03] to-transparent" />
           <Screenshot
             src={image}
             alt={imageAlt}

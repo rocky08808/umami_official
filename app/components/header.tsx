@@ -27,13 +27,13 @@ export function Header() {
 
         <div className="flex items-center gap-3">
           <a
-            href="#login"
+            href="https://cloud.webscount.com/"
             className="hidden text-sm text-muted transition-colors hover:text-foreground sm:block"
           >
             登录
           </a>
           <a
-            href="#signup"
+            href="https://cloud.webscount.com/"
             className="rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
           >
             免费开始

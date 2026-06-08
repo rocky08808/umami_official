@@ -1,4 +1,5 @@
 import type { Dictionary } from "../types";
+import pricing from "./pricing-zh";
 
 const zh: Dictionary = {
   meta: {
@@ -98,6 +99,7 @@ const zh: Dictionary = {
     ],
     copyright: "保留所有权利。",
   },
+  pricing,
 };
 
 export default zh;

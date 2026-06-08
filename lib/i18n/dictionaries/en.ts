@@ -1,4 +1,5 @@
 import type { Dictionary } from "../types";
+import pricing from "./pricing-en";
 
 const en: Dictionary = {
   meta: {
@@ -100,6 +101,7 @@ const en: Dictionary = {
     ],
     copyright: "All rights reserved.",
   },
+  pricing,
 };
 
 export default en;

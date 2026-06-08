@@ -1,3 +1,5 @@
+import type { PricingContent } from "./pricing-types";
+
 export type FeatureItem = {
   question: string;
   description: string;
@@ -52,4 +54,5 @@ export type Dictionary = {
     categories: FooterCategory[];
     copyright: string;
   };
+  pricing: PricingContent;
 };

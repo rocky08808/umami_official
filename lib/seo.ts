@@ -40,10 +40,21 @@ export function buildLanguageAlternates() {
   };
 }
 
-export function buildAlternates(locale: Locale) {
+export function buildAlternates(locale: Locale, path = "") {
+  const suffix = path ? `/${path}` : "";
+  const languages = Object.fromEntries(
+    locales.map((l) => [
+      localeHtmlLang[l],
+      absoluteUrl(localePath(l, suffix)),
+    ])
+  );
+
   return {
-    canonical: absoluteUrl(localePath(locale)),
-    languages: buildLanguageAlternates(),
+    canonical: absoluteUrl(localePath(locale, suffix)),
+    languages: {
+      ...languages,
+      "x-default": absoluteUrl(localePath(defaultLocale, suffix)),
+    },
   };
 }
 

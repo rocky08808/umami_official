@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { locales } from "@/lib/i18n/config";
 import { buildAlternates, localePath, siteUrl } from "@/lib/seo";
 
-const paths = ["", "pricing", "docs"] as const;
+const paths = ["", "pricing", "docs", "terms", "privacy"] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();

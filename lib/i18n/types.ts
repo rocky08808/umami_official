@@ -1,4 +1,5 @@
 import type { DocsContent } from "./docs-types";
+import type { PrivacyContent, TermsContent } from "./legal-types";
 import type { PricingContent } from "./pricing-types";
 
 export type FeatureItem = {
@@ -62,4 +63,6 @@ export type Dictionary = {
   };
   pricing: PricingContent;
   docs: DocsContent;
+  terms: TermsContent;
+  privacy: PrivacyContent;
 };

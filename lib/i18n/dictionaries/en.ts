@@ -1,6 +1,8 @@
 import type { Dictionary } from "../types";
 import docs from "./docs-en";
 import pricing from "./pricing-en";
+import privacy from "./privacy-en";
+import terms from "./terms-en";
 
 const en: Dictionary = {
   meta: {
@@ -105,17 +107,14 @@ const en: Dictionary = {
       },
       {
         title: "Resources",
-        links: [
-          { label: "Docs", href: "/docs" },
-          { label: "API", href: "https://cloud.webscount.com/docs/api" },
-        ],
+        links: [{ label: "Docs", href: "/docs" }],
       },
       {
         title: "Company",
         links: [
           { label: "About", href: "/#features" },
-          { label: "Privacy", href: "https://cloud.webscount.com/privacy" },
-          { label: "Terms", href: "https://cloud.webscount.com/terms" },
+          { label: "Privacy", href: "/privacy" },
+          { label: "Terms", href: "/terms" },
         ],
       },
     ],
@@ -123,6 +122,8 @@ const en: Dictionary = {
   },
   pricing,
   docs,
+  terms,
+  privacy,
 };
 
 export default en;

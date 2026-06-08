@@ -1,6 +1,8 @@
 import type { Dictionary } from "../types";
 import docs from "./docs-zh";
 import pricing from "./pricing-zh";
+import privacy from "./privacy-zh";
+import terms from "./terms-zh";
 
 const zh: Dictionary = {
   meta: {
@@ -103,17 +105,14 @@ const zh: Dictionary = {
       },
       {
         title: "资源",
-        links: [
-          { label: "文档", href: "/docs" },
-          { label: "API", href: "https://cloud.webscount.com/docs/api" },
-        ],
+        links: [{ label: "文档", href: "/docs" }],
       },
       {
         title: "公司",
         links: [
           { label: "关于", href: "/#features" },
-          { label: "隐私政策", href: "https://cloud.webscount.com/privacy" },
-          { label: "服务条款", href: "https://cloud.webscount.com/terms" },
+          { label: "隐私政策", href: "/privacy" },
+          { label: "服务条款", href: "/terms" },
         ],
       },
     ],
@@ -121,6 +120,8 @@ const zh: Dictionary = {
   },
   pricing,
   docs,
+  terms,
+  privacy,
 };
 
 export default zh;

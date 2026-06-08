@@ -7,6 +7,7 @@ import {
 } from "./i18n/config";
 import type { Dictionary } from "./i18n/types";
 import type { DocsContent } from "./i18n/docs-types";
+import type { PrivacyContent, TermsContent } from "./i18n/legal-types";
 import type { PricingContent } from "./i18n/pricing-types";
 import { cloudUrl, siteName } from "./site";
 
@@ -225,6 +226,8 @@ export function buildJsonLd(locale: Locale, dict: Dictionary) {
             absoluteUrl(localePath(locale)),
             absoluteUrl(localePath(locale, "pricing")),
             absoluteUrl(localePath(locale, "docs")),
+            absoluteUrl(localePath(locale, "terms")),
+            absoluteUrl(localePath(locale, "privacy")),
           ],
         },
       },
@@ -439,4 +442,55 @@ export function buildDocsJsonLd(
       },
     ],
   };
+}
+
+function buildLegalJsonLd(
+  locale: Locale,
+  path: string,
+  content: TermsContent | PrivacyContent
+) {
+  const homeUrl = absoluteUrl(localePath(locale));
+  const pageUrl = absoluteUrl(localePath(locale, path));
+  const homeLabel = locale === "zh" ? "首页" : "Home";
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#webpage`,
+        url: pageUrl,
+        name: content.meta.title,
+        description: content.meta.description,
+        isPartOf: { "@id": `${siteUrl}/#website` },
+        inLanguage: localeHtmlLang[locale],
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: homeLabel,
+            item: homeUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: content.title,
+            item: pageUrl,
+          },
+        ],
+      },
+    ],
+  };
+}
+
+export function buildTermsJsonLd(locale: Locale, terms: TermsContent) {
+  return buildLegalJsonLd(locale, "terms", terms);
+}
+
+export function buildPrivacyJsonLd(locale: Locale, privacy: PrivacyContent) {
+  return buildLegalJsonLd(locale, "privacy", privacy);
 }

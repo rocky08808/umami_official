@@ -24,7 +24,7 @@ const en: Dictionary = {
     signup: "Get started",
   },
   hero: {
-    badge: "Privacy-first · No cookies · Open source friendly",
+    badge: "Privacy-first · No cookies",
     title: "Powerful analytics,",
     titleAccent: "without the complexity",
     description:

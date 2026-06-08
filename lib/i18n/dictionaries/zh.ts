@@ -24,7 +24,7 @@ const zh: Dictionary = {
     signup: "免费开始",
   },
   hero: {
-    badge: "注重隐私 · 无需 Cookie · 开源友好",
+    badge: "注重隐私 · 无需 Cookie",
     title: "强大的数据分析，",
     titleAccent: "无需复杂配置",
     description: "几分钟完成部署，立即获取洞察。轻量、快速、尊重用户隐私。",
